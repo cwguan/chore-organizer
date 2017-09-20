@@ -38,13 +38,13 @@ def renderCreate_Result():
 
 @app.route('/create2')
 def renderCreate2():
-    return render_template('create2.html')
+    return render_template('create2.html', numRoommates=session["numRoommates"])
 
 
 @app.route('/create3', methods=['GET', 'POST'])
 def renderCreate3():
     names = request.form.getlist('names')
-    return render_template('create3.html', names = names)
+    return render_template('create3.html', names = names, lenName = len(names))
 
 if __name__ == '__main__':
     app.run(port=5000)

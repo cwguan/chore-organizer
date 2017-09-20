@@ -6,10 +6,13 @@
 
 <p>Your apartment name is {{ session["apartmentName"] }}</p>
 <p>The number of roommates you have is {{ session["numRoommates"] }}</p>
-<p>The names of your roommates are
-  {{% for name in names }}
-    {{% name %}}
-  {{% endfor %}}
-</p>
+<p>The names of your roommates are: </p>
+
+<p> {{ lenName }}</p>
+
+{% for name in names %}
+  <p> {{ name }}</p>
+  <p> {{ len(names) }} </p>
+{% endfor %}
 
 {% endblock %}
