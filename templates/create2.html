@@ -10,7 +10,7 @@
 <p> Enter the name(s) of you and your roommate(s).</p>
 
 <form action="/create3">
-  {{% for x in session["numRoommates" %]}}
+  {{% for x in session["numRoommates"] %}}
     <p><input type="text" name="names" value=""></p>
   {{% endfor %}}
   <input type="submit" value="Submit">
