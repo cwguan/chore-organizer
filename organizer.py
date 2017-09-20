@@ -41,7 +41,7 @@ def renderCreate2():
     return render_template('create2.html')
 
 
-@app.route('/create3')
+@app.route('/create3', methods=['GET', 'POST'])
 def renderCreate3():
     names = request.form.getlist('names')
     return render_template('create3.html', names = names)
