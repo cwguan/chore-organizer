@@ -26,18 +26,18 @@ def home():
     return render_template('home.html')
 
 @app.route('/create')
-def create():
+def renderCreate():
     return render_template('create.html')
 
 @app.route('/create_result', methods=['GET', 'POST'])
-def create_result():
+def renderCreate_Result():
     session[apartmentName] = request.args["apartment-name"]
     session[numRoommates] = int(request.args["number-roommates"])
 
-    return redirect(url_for('create2'))
+    return redirect(url_for('renderCreate2'))
 
 @app.route('/create2', methods=['GET', 'Post'])
-def create2():
+def renderCreate2():
     return render_template('create2.html')
 
 if __name__ == '__main__':
