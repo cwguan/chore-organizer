@@ -19,9 +19,22 @@ app.config['MONGO_USERNAME'] = os.environ['MONGO_USERNAME']
 app.config['MONGO_PASSWORD'] = os.environ['MONGO_PASSWORD']
 mongo = PyMongo(app)
 
+#mongo.db.chores.insert_one()
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/create')
+def create():
+    return render_template('create.html')
+
+@app.route('/create_result')
+def create_result():
+    session[apartmentName] = request.args["apartment-name"]
+    session[numRoommates] = int(request.args["number-roommates"])
+
+    return render_template('create2.html')
 
 if __name__ == '__main__':
     app.run()

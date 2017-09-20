@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Step 2{% endblock %}
+
+{% block content %}
+
+<p>Your apartment name is {{ session[apartmentName] }}</p>
+<p>The number of roommates you have is {{ session[numRoommates] }}</p>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Create your Apartment{% endblock %}
+
+{% block content %}
+  <h1> Let's create your apartment! </h1>
+
+  <!-- Collecting information about apartment -->
+  <form action="/create_result">
+    <input type="text" name="apartment-name" placeholder="Example Apartment Homes #1234" value="">
+
+    <!-- Dropdown list to choose the number of roommates living in the apartment -->
+    <select name="number-roommates">
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+
+
+    <input type="submit" value="Create">
+  </form>
+{% endblock %}
