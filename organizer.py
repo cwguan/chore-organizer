@@ -34,6 +34,10 @@ def create_result():
     session[apartmentName] = request.args["apartment-name"]
     session[numRoommates] = int(request.args["number-roommates"])
 
+    return redirect(url_for('create2'))
+
+@app.route('/create2')
+def create2():
     return render_template('create2.html')
 
 if __name__ == '__main__':
