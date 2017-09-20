@@ -40,5 +40,11 @@ def renderCreate_Result():
 def renderCreate2():
     return render_template('create2.html')
 
+
+@app.route('/create3')
+def renderCreate3():
+    names = request.form.getlist('names')
+    return render_template('create3.html', names = names)
+
 if __name__ == '__main__':
     app.run()

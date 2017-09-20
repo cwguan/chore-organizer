@@ -7,11 +7,13 @@
 <p>Your apartment name is {{ session["apartmentName"] }}</p>
 <p>The number of roommates you have is {{ session["numRoommates"] }}</p>
 
-<p> Enter the name(s) of your roommate(s).</p>
+<p> Enter the name(s) of you and your roommate(s).</p>
 
-
-{{% for x in session["numRoommates"] %}}
-  <p><input type="text" name="roommate"+{{ x }} value=""></p>
-{{% endfor %}}
+<form action="/create3">
+  {{% for x in session["numRoommates" %]}}
+    <p><input type="text" name="names" value=""></p>
+  {{% endfor %}}
+  <input type="submit" value="Submit">
+</form>
 
 {% endblock %}
