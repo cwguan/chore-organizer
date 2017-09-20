@@ -29,14 +29,14 @@ def home():
 def create():
     return render_template('create.html')
 
-@app.route('/create_result')
+@app.route('/create_result', methods=['GET', 'POST'])
 def create_result():
     session[apartmentName] = request.args["apartment-name"]
     session[numRoommates] = int(request.args["number-roommates"])
 
     return redirect(url_for('create2'))
 
-@app.route('/create2')
+@app.route('/create2', methods=['GET', 'Post'])
 def create2():
     return render_template('create2.html')
 
