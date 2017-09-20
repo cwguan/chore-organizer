@@ -8,6 +8,7 @@
 <p>The number of roommates you have is {{ session["numRoommates"] }}</p>
 <p>The names of your roommates are: </p>
 
+<!-- For loop to list out all of the occupants' names -->
 {% for name in names %}
   <p> {{ name }}</p>
 {% endfor %}

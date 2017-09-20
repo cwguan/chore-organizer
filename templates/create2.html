@@ -10,7 +10,9 @@
 <p> Enter the name(s) of you and your roommate(s).</p>
 
 <form action="/create3">
+  <!-- For loop to create the correct number of text boxes -->
   {% for x in range(numRoommates) %}
+    <!-- Used same value for name attribute to get a list -->
     <p><input type="text" name="names" value=""></p>
   {% endfor %}
   <input type="submit" value="Submit">

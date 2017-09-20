@@ -25,16 +25,20 @@ mongo = PyMongo(app)
 def home():
     return render_template('home.html')
 
+
 @app.route('/create')
 def renderCreate():
     return render_template('create.html')
 
+
 @app.route('/create_result', methods=['GET', 'POST'])
 def renderCreate_Result():
+    # Retrieves the information from the form and stores it in the session
     session["apartmentName"] = request.args["apartment-name"]
     session["numRoommates"] = int(request.args["number-roommates"])
 
     return redirect(url_for('renderCreate2'))
+
 
 @app.route('/create2')
 def renderCreate2():
@@ -43,8 +47,10 @@ def renderCreate2():
 
 @app.route('/create3', methods=['GET', 'POST'])
 def renderCreate3():
-    names = request.args.getlist('names')
-    return render_template('create3.html', names = names)
+    # Retrieves list using input tags that share the same name attribute
+    session["names"] = request.args.getlist('names')
+    return render_template('create3.html', names=session["names"])
+
 
 if __name__ == '__main__':
     app.run()
