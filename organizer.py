@@ -43,8 +43,8 @@ def renderCreate2():
 
 @app.route('/create3', methods=['GET', 'POST'])
 def renderCreate3():
-    names = request.form.getlist('names')
-    return render_template('create3.html', names = names, lenName = len(names))
+    names = request.args.getlist('names')
+    return render_template('create3.html', names = names)
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run()
