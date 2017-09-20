@@ -36,7 +36,7 @@ def renderCreate_Result():
 
     return redirect(url_for('renderCreate2'))
 
-@app.route('/create2', methods=['GET', 'POST'])
+@app.route('/create2')
 def renderCreate2():
     return render_template('create2.html')
 
