@@ -31,8 +31,8 @@ def renderCreate():
 
 @app.route('/create_result', methods=['GET', 'POST'])
 def renderCreate_Result():
-    session[apartmentName] = request.args["apartment-name"]
-    session[numRoommates] = int(request.args["number-roommates"])
+    session["apartmentName"] = request.args["apartment-name"]
+    session["numRoommates"] = int(request.args["number-roommates"])
 
     return redirect(url_for('renderCreate2'))
 
