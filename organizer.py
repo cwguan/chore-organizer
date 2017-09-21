@@ -35,7 +35,10 @@ def renderCreate():
 def renderCreate_Result():
     # Retrieves the information from the form and stores it in the session
     session["apartmentName"] = request.args["apartment-name"]
+    session["password"] = request.args["password"]
     session["numRoommates"] = int(request.args["number-roommates"])
+
+    ''' CHECK IN DATABASE IF NAME/PASSWORD ALREADY IN USE'''
 
     # Handles user-input when it is not an int
     try:
