@@ -5,6 +5,7 @@
 {% block content %}
 
 <p>Your apartment name is {{ session["apartmentName"] }}</p>
+<p>You have {{ session["numTasks"] }} tasks to do.</p>
 <p>The number of roommates you have is {{ session["numRoommates"] }}</p>
 
 <p> Enter the name(s) of you and your roommate(s).</p>
@@ -13,7 +14,7 @@
   <!-- For loop to create the correct number of text boxes -->
   {% for x in range(numRoommates) %}
     <!-- Used same value for name attribute to get a list -->
-    <p><input type="text" name="names" value=""></p>
+    <p><input type="text" name="names" value="" required></p>
   {% endfor %}
   <input type="submit" value="Submit">
 </form>

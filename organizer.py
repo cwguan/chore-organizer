@@ -37,6 +37,15 @@ def renderCreate_Result():
     session["apartmentName"] = request.args["apartment-name"]
     session["numRoommates"] = int(request.args["number-roommates"])
 
+    # Handles user-input when it is not an int
+    try:
+        session["numTasks"] = int(request.args["number-tasks"])
+        maxTasks = 15
+        if session["numTasks"] > maxTasks:
+            return "Sorry, the current maximum number of tasks right now is 15."
+    except ValueError:
+        return "Sorry, something went wrong. Please enter an integer."
+
     return redirect(url_for('renderCreate2'))
 
 
@@ -49,7 +58,7 @@ def renderCreate2():
 def renderCreate3():
     # Retrieves list using input tags that share the same name attribute
     session["names"] = request.args.getlist('names')
-    return render_template('create3.html', names=session["names"])
+    return render_template('create3.html', names=session["names"], numTasks=session["numTasks"])
 
 
 if __name__ == '__main__':
