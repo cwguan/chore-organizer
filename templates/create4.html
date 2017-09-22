@@ -22,16 +22,18 @@
 
 <p> Now, assign a person to each task. </p>
 
+<!-- Uses 2 for-loops to generate task with corresponding dropdown menus -->
 <form action="/finish">
   {% for task in tasks %}
     <p>{{ task }}</p>
     <select name="task-roommate">
+      <!-- Loops through passed-in list of roommate names to generate dropdown-->
       {% for name in names %}
         <option value="{{ name }}">{{ name }}</option>
       {% endfor %}
     </select>
 
-  {% endfor %}
+  {% endfor %} <!-- Tasks for-loop -->
   <br><br>
   <input type="submit" value="Finish!">
 </form>

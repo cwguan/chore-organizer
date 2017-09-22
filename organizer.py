@@ -74,11 +74,15 @@ def renderCreate4():
 @app.route('/finish')
 def renderFinish():
     assignments = request.args.getlist('task-roommate')
+    # Creates a dictionary where the task is the key, roommate is the value
     task_roommate = {}
     index = 0
     for item in session["tasks"]:
+        # Uses list from create4 and iterates through in order
         task_roommate[item] = assignments[index]
         index += 1
+
+    # Saves dictionary to session
     session["task-roommate"] = task_roommate
     return render_template('finish.html', names=session["names"],
                             tasks=session["tasks"], numTasks=session["numTasks"],
