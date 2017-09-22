@@ -64,5 +64,26 @@ def renderCreate3():
     return render_template('create3.html', names=session["names"], numTasks=session["numTasks"])
 
 
+@app.route('/create4')
+def renderCreate4():
+    session["tasks"] = request.args.getlist('tasks')
+    return render_template('create4.html', names=session["names"],
+                            tasks=session["tasks"], numTasks=session["numTasks"])
+
+
+@app.route('/finish')
+def renderFinish():
+    assignments = request.args.getlist('task-roommate')
+    task_roommate = {}
+    index = 0
+    for item in session["tasks"]:
+        task_roommate[item] = assignments[index]
+        index += 1
+    session["task-roommate"] = task_roommate
+    return render_template('finish.html', names=session["names"],
+                            tasks=session["tasks"], numTasks=session["numTasks"],
+                            task_roommate=session["task-roommate"])
+
+
 if __name__ == '__main__':
     app.run()

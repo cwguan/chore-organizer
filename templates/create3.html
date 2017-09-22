@@ -14,6 +14,8 @@
   <p> {{ name }}</p>
 {% endfor %}
 
+<p> Here is where you will enter the {{ session["numTasks}"] }} tasks.</p>
+
 <form action="/create4">
   <!-- For loop to create the correct number of text boxes -->
   {% for x in range(numTasks) %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Step 4{% endblock %}
+
+{% block content %}
+
+<p>Your apartment name is {{ session["apartmentName"] }}</p>
+<p>You have {{ session["numTasks"] }} tasks to do</p>
+<p>The number of roommates you have is {{ session["numRoommates"] }}</p>
+<p>The names of your roommates are: </p>
+
+<!-- For loop to list out all of the occupants' names -->
+{% for name in names %}
+  <p> {{ name }}</p>
+{% endfor %}
+
+<p>The tasks for the apartment are: </p>
+<!-- For loop to list out all the tasks -->
+{% for task in tasks %}
+  <p> {{ task }} </p>
+{% endfor %}
+
+<p> Now, assign a person to each task. </p>
+
+<form action="/finish">
+  {% for task in tasks %}
+    <p>{{ task }}</p>
+    <select name="task-roommate">
+      {% for name in names %}
+        <option value="{{ name }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+
+  {% endfor %}
+  <br><br>
+  <input type="submit" value="Finish!">
+</form>
+
+{% endblock %}

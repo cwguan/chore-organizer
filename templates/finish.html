@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Finished!{% endblock %}
+
+{% block content %}
+
+<p>Your apartment name is {{ session["apartmentName"] }}</p>
+<p>You have {{ session["numTasks"] }} tasks to do</p>
+<p>The number of roommates you have is {{ session["numRoommates"] }}</p>
+<p>The names of your roommates are: </p>
+
+<!-- For loop to list out all of the occupants' names -->
+{% for name in names %}
+  <p> {{ name }}</p>
+{% endfor %}
+
+<p>The tasks for the apartment are: </p>
+<!-- For loop to list out all the tasks -->
+{% for task in tasks %}
+  <p> {{ task }} </p>
+{% endfor %}
+
+{% for task, roommate in task_roommate.items() %}
+  <p> {{ roommate }} is in charge of {{ task }}</p>
+{% endfor %}
+
+
+{% endblock %}
