@@ -140,21 +140,25 @@ def renderLookup():
     return render_template('lookup.html')
 
 
-@app.route('/lookup2')
+@app.route('/lookup2', methods=['GET', 'POST'])
 def renderLookup2():
-    inputName = request.args["apartmentName"]
-    inputPassword = request.args["password"]
+    inputName = request.form.get("apartmentName")
+    inputPassword = request.form.get("password")
 
+    # Finds the apartment that matches the name
     db_apartments = list(mongo.db.chores.find(
-                         {"apartmentName" : session["apartmentName"]}))
+                         {"apartmentName" : inputName }))
 
+    # Case 1: Could not find an apartment document that matches the name
     if len(db_apartments) == 0:
         return render_template('error_lookup.html', message = "Sorry, that \
                                 apartment does not exist yet.")
     else:
+        # Case 2: Password is incorrect for inputted apartment name
         if db_apartments[0]["password"] != inputPassword:
             return render_template("error_lookup.html", message = "Incorrect \
                                     password. Please try again.")
+        # Case 3: Successful input, goes to the next step
         else:
             return render_template('lookup2.html')
 
