@@ -37,16 +37,23 @@ def renderCreate_Result():
     session["password"] = request.args["password"]
     session["numRoommates"] = int(request.args["number-roommates"])
 
-    ''' CHECK IN DATABASE IF NAME/PASSWORD ALREADY IN USE'''
+    # Checks database to see if the apartmentName is already in use
+    db_apartments = list(mongo.db.chores.find(
+                                {"apartmentName" : session["apartmentName"]}))
+    if len(db_apartments) != 0:
+        return render_template('error.html', message = "Sorry, that name is \
+                                already in use. Please use a different one.")
 
-    # Handles user-input when it is not an int or when it is over the maximum
+    # Handles user-input when numTasks is not int or over the maximum
     try:
         session["numTasks"] = int(request.args["number-tasks"])
         maxTasks = 15
         if session["numTasks"] > maxTasks:
-            return "Sorry, the current maximum number of tasks right now is 15."
+            return render_template('error.html', message = "Sorry, the current \
+                                   maximum number of tasks right now is 15.")
     except ValueError:
-        return "Sorry, something went wrong. Please enter an integer."
+        return render_template('error.html', message = "Sorry, something went \
+                                wrong. Please enter an integer.")
 
     return redirect(url_for('renderCreate2'))
 
@@ -121,6 +128,11 @@ def renderSave_Result():
 def renderFinish():
     return render_template('finish.html')
 
+
+@app.route('/restart')
+def renderRestart():
+    session.clear()
+    return redirect(url_for('renderCreate'))
 
 if __name__ == '__main__':
     app.run()
