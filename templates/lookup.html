@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Look Up Your Apartment{% endblock %}
+
+{% block content %}
+
+<h1>Enter your apartment's information</h1>
+
+<form action="/lookup2">
+  <p>Apartment Name<br>
+    <input type="text" name="apartmentName" value="" required> <br><br>
+    Password <br>
+    <input type="text" name="password" value="" required> <br>
+    <input type="submit" value="Enter">
+  </p>
+</form>
+{% endblock %}

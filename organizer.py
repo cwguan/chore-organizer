@@ -41,7 +41,7 @@ def renderCreate_Result():
     db_apartments = list(mongo.db.chores.find(
                                 {"apartmentName" : session["apartmentName"]}))
     if len(db_apartments) != 0:
-        return render_template('error.html', message = "Sorry, that name is \
+        return render_template('error_create.html', message = "Sorry, that name is \
                                 already in use. Please use a different one.")
 
     # Handles user-input when numTasks is not int or over the maximum
@@ -49,10 +49,10 @@ def renderCreate_Result():
         session["numTasks"] = int(request.args["number-tasks"])
         maxTasks = 15
         if session["numTasks"] > maxTasks:
-            return render_template('error.html', message = "Sorry, the current \
+            return render_template('error_create.html', message = "Sorry, the current \
                                    maximum number of tasks right now is 15.")
     except ValueError:
-        return render_template('error.html', message = "Sorry, something went \
+        return render_template('error_create.html', message = "Sorry, something went \
                                 wrong. Please enter an integer.")
 
     return redirect(url_for('renderCreate2'))
@@ -129,10 +129,41 @@ def renderFinish():
     return render_template('finish.html')
 
 
-@app.route('/restart')
-def renderRestart():
+@app.route('/create_restart')
+def renderCreate_Restart():
     session.clear()
     return redirect(url_for('renderCreate'))
+
+
+@app.route('/lookup')
+def renderLookup():
+    return render_template('lookup.html')
+
+
+@app.route('/lookup2')
+def renderLookup2():
+    inputName = request.args["apartmentName"]
+    inputPassword = request.args["password"]
+
+    db_apartments = list(mongo.db.chores.find(
+                         {"apartmentName" : session["apartmentName"]}))
+
+    if len(db_apartments) == 0:
+        return render_template('error_lookup.html', message = "Sorry, that \
+                                apartment does not exist yet.")
+    else:
+        if db_apartments[0]["password"] != inputPassword:
+            return render_template("error_lookup.html", message = "Incorrect \
+                                    password. Please try again.")
+        else:
+            return render_template('lookup2.html')
+
+
+@app.route('/lookup_restart')
+def renderLookup_Restart():
+    session.clear()
+    return redirect(url_for('renderLookup'))
+
 
 if __name__ == '__main__':
     app.run()

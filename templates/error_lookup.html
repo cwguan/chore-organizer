@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Sorry, something went wrong!{% endblock %}
+
+{% block content %}
+
+<h1>{{ message }}</h1>
+
+<form action="/lookup_restart">
+  <input type="submit" value="Start Over">
+</form>
+
+{% endblock %}
