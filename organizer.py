@@ -90,16 +90,36 @@ def renderCreate5():
 
 @app.route('/save_result')
 def renderSave_Result():
+    # Creates a dictionary with each task and a list of every roommate
+    task_nameList = {}
+    for task in session["tasks"]:
+        # List to hold the person first assigned to a task, then the rest
+        tempList=[]
+        tempList.append(session["task-roommate"][task])
+
+        # Iterates through remaining names & adds to the list
+        for name in session["names"]:
+            if name != tempList[0]:
+                tempList.append(name)
+
+        task_nameList[task] = tempList
+
     # Saves information from session to database and clears the session
-    mongo.db.chores.insert_one()
+    mongo.db.chores.insert_one({"apartmentName" : session["apartmentName"],
+                                "password" : session["password"],
+                                "numRoommates" : session["numRoommates"],
+                                "names" : session["names"],
+                                "numTasks" : session["numTasks"],
+                                "tasks" : session["tasks"],
+                                "task-nameList" : task_nameList
+                                })
+    session.clear()
     return redirect(url_for('renderFinish'))
 
 
 @app.route('/finish')
 def renderFinish():
-    return render_template('finish.html', names=session["names"],
-                            tasks=session["tasks"], numTasks=session["numTasks"],
-                            task_roommate=session["task-roommate"])
+    return render_template('finish.html')
 
 
 if __name__ == '__main__':
