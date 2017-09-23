@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Step 4{% endblock %}
+{% block title %}Almost Done!{% endblock %}
 
 {% block content %}
 
@@ -20,22 +20,16 @@
   <p> {{ task }} </p>
 {% endfor %}
 
-<p> Now, assign a person to each task. </p>
+{% for task, roommate in task_roommate.items() %}
+  <p> {{ roommate }} is in charge of {{ task }}</p>
+{% endfor %}
 
-<!-- Uses 2 for-loops to generate task with corresponding dropdown menus -->
-<form action="/create5">
-  {% for task in tasks %}
-    <p>{{ task }}</p>
-    <select name="task-roommate">
-      <!-- Loops through passed-in list of roommate names to generate dropdown-->
-      {% for name in names %}
-        <option value="{{ name }}">{{ name }}</option>
-      {% endfor %}
-    </select>
+<p> Make sure everything is right! If it all looks good, hit the 'Save' button
+    to save it to the database! </p>
 
-  {% endfor %} <!-- Tasks for-loop -->
-  <br><br>
-  <input type="submit" value="Finish!">
+<form action='/save_result'>
+  <input type="submit" value="Save!">
 </form>
+
 
 {% endblock %}

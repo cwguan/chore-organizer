@@ -19,7 +19,6 @@ app.config['MONGO_USERNAME'] = os.environ['MONGO_USERNAME']
 app.config['MONGO_PASSWORD'] = os.environ['MONGO_PASSWORD']
 mongo = PyMongo(app)
 
-#mongo.db.chores.insert_one()
 
 @app.route('/')
 def home():
@@ -40,7 +39,7 @@ def renderCreate_Result():
 
     ''' CHECK IN DATABASE IF NAME/PASSWORD ALREADY IN USE'''
 
-    # Handles user-input when it is not an int
+    # Handles user-input when it is not an int or when it is over the maximum
     try:
         session["numTasks"] = int(request.args["number-tasks"])
         maxTasks = 15
@@ -71,8 +70,8 @@ def renderCreate4():
                             tasks=session["tasks"], numTasks=session["numTasks"])
 
 
-@app.route('/finish')
-def renderFinish():
+@app.route('/create5')
+def renderCreate5():
     assignments = request.args.getlist('task-roommate')
     # Creates a dictionary where the task is the key, roommate is the value
     task_roommate = {}
@@ -84,6 +83,20 @@ def renderFinish():
 
     # Saves dictionary to session
     session["task-roommate"] = task_roommate
+    return render_template('create5.html', names=session["names"],
+                            tasks=session["tasks"], numTasks=session["numTasks"],
+                            task_roommate=session["task-roommate"])
+
+
+@app.route('/save_result')
+def renderSave_Result():
+    # Saves information from session to database and clears the session
+    mongo.db.chores.insert_one()
+    return redirect(url_for('renderFinish'))
+
+
+@app.route('/finish')
+def renderFinish():
     return render_template('finish.html', names=session["names"],
                             tasks=session["tasks"], numTasks=session["numTasks"],
                             task_roommate=session["task-roommate"])
