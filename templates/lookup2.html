@@ -4,4 +4,20 @@
 
 {% block content %}
 
+{% for task, roommate in apartment.task_nameList.items() %}
+  <p>{{ roommate[0] }} is in charge of {{ task }}</p>
+{% endfor %}
+
+<p> I am
+  <form action="/lookup3">
+    <select name="current-roommate">
+      {% for name in apartment.names %}
+        <option value="{{ name }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Enter">
+  </form>
+</p>
+
+
 {% endblock %}

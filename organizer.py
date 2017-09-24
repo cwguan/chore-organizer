@@ -118,7 +118,7 @@ def renderSave_Result():
                                 "names" : session["names"],
                                 "numTasks" : session["numTasks"],
                                 "tasks" : session["tasks"],
-                                "task-nameList" : task_nameList
+                                "task_nameList" : task_nameList
                                 })
     session.clear()
     return redirect(url_for('renderFinish'))
@@ -146,21 +146,39 @@ def renderLookup2():
     inputPassword = request.form.get("password")
 
     # Finds the apartment that matches the name
-    db_apartments = list(mongo.db.chores.find(
+    db_apartment = list(mongo.db.chores.find(
                          {"apartmentName" : inputName }))
 
     # Case 1: Could not find an apartment document that matches the name
-    if len(db_apartments) == 0:
+    if len(db_apartment) == 0:
         return render_template('error_lookup.html', message = "Sorry, that \
                                 apartment does not exist yet.")
     else:
         # Case 2: Password is incorrect for inputted apartment name
-        if db_apartments[0]["password"] != inputPassword:
-            return render_template("error_lookup.html", message = "Incorrect \
+        if db_apartment[0]["password"] != inputPassword:
+            return render_template('error_lookup.html', message = "Incorrect \
                                     password. Please try again.")
         # Case 3: Successful input, goes to the next step
         else:
-            return render_template('lookup2.html')
+            session["currentApartment"] = inputName
+            return render_template('lookup2.html', apartment=db_apartment[0])
+
+@app.route('/lookup3')
+def renderLookup3():
+    currentRoommate = request.args["current-roommate"]
+    apartment = list(mongo.db.chores.find(
+                         {"apartmentName" : session["currentApartment"] }))[0]
+    assigned_tasks = []
+    for task, roommate in apartment["task_nameList"].items():
+        if roommate[0] == currentRoommate:
+            assigned_tasks.append(task)
+
+    if len(assigned_tasks) == 0:
+        session.clear()
+        return render_template('lookup3.html', no_tasks=True)
+    else:
+        return render_template('lookup3.html', no_tasks=False,
+                                assigned_tasks=assigned_tasks)
 
 
 @app.route('/lookup_restart')

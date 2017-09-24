@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Your Tasks{% endblock %}
+
+{% block content %}
+
+{% if no_tasks %}
+  <p> You have no tasks! You're all done! Hooray! </p>
+{% else %}
+  <p> I have finished: </p>
+  <form action="/lookup3">
+    {% for task in assigned_tasks %}
+    <input type="checkbox" name="finished-task" value="{{ task }}"> {{ task }} <br>
+    {% endfor %}
+  </form>
+{% endif %}
+
+{% endblock %}
