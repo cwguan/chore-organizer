@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}You have finished!{% endblock %}
+
+{% block content %}
+<h1> The current assignments are:</h1>
+
+{% for task, roommate in apartment.task_nameList.items() %}
+  <p>{{ roommate[0] }} is in charge of {{ task }}</p>
+{% endfor %}
+
+{% endblock %}

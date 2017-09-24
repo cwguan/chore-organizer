@@ -8,10 +8,11 @@
   <p> You have no tasks! You're all done! Hooray! </p>
 {% else %}
   <p> I have finished: </p>
-  <form action="/lookup3">
+  <form action="/finish_lookup" method="post">
     {% for task in assigned_tasks %}
     <input type="checkbox" name="finished-task" value="{{ task }}"> {{ task }} <br>
     {% endfor %}
+    <input type="submit" value="Submit">
   </form>
 {% endif %}
 

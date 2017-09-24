@@ -166,8 +166,7 @@ def renderLookup2():
 @app.route('/lookup3')
 def renderLookup3():
     currentRoommate = request.args["current-roommate"]
-    apartment = list(mongo.db.chores.find(
-                         {"apartmentName" : session["currentApartment"] }))[0]
+    apartment = list(mongo.db.chores.find({"apartmentName" : session["currentApartment"] }))[0]
     assigned_tasks = []
     for task, roommate in apartment["task_nameList"].items():
         if roommate[0] == currentRoommate:
@@ -180,6 +179,24 @@ def renderLookup3():
         return render_template('lookup3.html', no_tasks=False,
                                 assigned_tasks=assigned_tasks)
 
+
+@app.route('/finish_lookup', methods=['GET','POST'])
+def renderFinish_Lookup():
+    completed = request.form.getlist('finished-task')
+    apartment = list(mongo.db.chores.find(
+                         {"apartmentName": session["currentApartment"] }))[0]
+
+    # For every completed task, pops that roommate's name and adds to the end
+    for task in completed:
+        tempName = apartment["task_nameList"][task].pop(0)
+        apartment["task_nameList"][task].append(tempName)
+
+    # Updates database key with the new values
+    mongo.db.chores.update({"apartmentName": session["currentApartment"]},
+                            {
+                                "$set":{"task_nameList": apartment["task_nameList"]}
+                            })
+    return render_template('finish_lookup.html', apartment=apartment)
 
 @app.route('/lookup_restart')
 def renderLookup_Restart():
