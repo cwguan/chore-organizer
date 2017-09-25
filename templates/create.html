@@ -6,23 +6,22 @@
   <h1> Let's create your apartment! </h1>
 
   <!-- Collecting information about apartment -->
-  <form action="/create_result">
-    <p> Enter your apartment name and your password. Be sure to save this to be
-        to access your apartment information later! <br>
+  <form action="/create_result" class="w3-container">
+    <p> Enter your apartment name and your password. Spelling and spacing are
+        extremely important! Be sure to save this to be able to access your
+        apartment, complete tasks, and much more! <br>
 
-        Name<br>
-        <input type="text" name="apartment-name" size="35"
+        <label>Name</label>
+        <input type="text" name="apartment-name" size="35" class="w3-input w3-border w3-round-large"
           placeholder="Example Apartment Homes #1234" value="" required><br>
 
-          <br>
-
-        Password<br>
-        <input type="password" name="password" value="" required>
+        <label>Password</label>
+        <input type="password" name="password" value="" class="w3-input w3-border w3-round-large" required>
     </p>
 
     <!-- Dropdown list to choose the number of roommates living in the apartment -->
     <p> Number of Roommates <br>
-      <select name="number-roommates">
+      <select class="w3-select w3-border" name="number-roommates">
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
@@ -31,11 +30,12 @@
       </select>
     </p>
 
-    <p> Enter the number of tasks you have around your apartment (e.g. "Taking out the trash").
+    <p> Enter the number of tasks you have around your apartment (e.g. "taking out the trash").
         The maximum number of tasks you can input is 15.<br>
-      <input type="text" name="number-tasks" size="15" value="" required>
+      <input type="text" name="number-tasks" size="15" value=""
+        class="w3-input w3-border w3-round-large" required>
     </p>
 
-    <input type="submit" value="Create">
+    <p><button class="w3-btn w3-red" type="submit">Create</button></p>
   </form>
 {% endblock %}
