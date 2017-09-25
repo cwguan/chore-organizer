@@ -44,7 +44,7 @@ def renderCreate_Result():
         return render_template('error_create.html', message = "Sorry, that name is \
                                 already in use. Please use a different one.")
 
-    # Handles user-input when numTasks is not int or over the maximum
+    # Handles user-input when numTasks is not an int or over the maximum
     try:
         session["numTasks"] = int(request.args["number-tasks"])
         maxTasks = 15
@@ -72,6 +72,7 @@ def renderCreate3():
 
 @app.route('/create4')
 def renderCreate4():
+    # Retrieves all the tasks user input using the same name attribute
     session["tasks"] = request.args.getlist('tasks')
     return render_template('create4.html', names=session["names"],
                             tasks=session["tasks"], numTasks=session["numTasks"])
@@ -97,7 +98,7 @@ def renderCreate5():
 
 @app.route('/save_result')
 def renderSave_Result():
-    # Creates a dictionary with each task and a list of every roommate
+    # Creates a dictionary with each task with a key of a list w/ every roommate
     task_nameList = {}
     for task in session["tasks"]:
         # List to hold the person first assigned to a task, then the rest
@@ -163,15 +164,21 @@ def renderLookup2():
             session["currentApartment"] = inputName
             return render_template('lookup2.html', apartment=db_apartment[0])
 
+
 @app.route('/lookup3')
 def renderLookup3():
+    # Gathers info about the current roommate logging in & his/her apartment
     currentRoommate = request.args["current-roommate"]
     apartment = list(mongo.db.chores.find({"apartmentName" : session["currentApartment"] }))[0]
+
+    # Iterates through the all the task-roommates to see if currentRoommate
+    # is the zeroth index of any task
     assigned_tasks = []
     for task, roommate in apartment["task_nameList"].items():
         if roommate[0] == currentRoommate:
             assigned_tasks.append(task)
 
+    # Case where the currentRoommate has no assigned tasks
     if len(assigned_tasks) == 0:
         session.clear()
         return render_template('lookup3.html', no_tasks=True)
@@ -182,6 +189,7 @@ def renderLookup3():
 
 @app.route('/finish_lookup', methods=['GET','POST'])
 def renderFinish_Lookup():
+    # List of all the tasks the currentRoommate has compeleted
     completed = request.form.getlist('finished-task')
     apartment = list(mongo.db.chores.find(
                          {"apartmentName": session["currentApartment"] }))[0]
@@ -191,12 +199,13 @@ def renderFinish_Lookup():
         tempName = apartment["task_nameList"][task].pop(0)
         apartment["task_nameList"][task].append(tempName)
 
-    # Updates database key with the new values
+    # Updates database key with the new task_nameList with pop/append
     mongo.db.chores.update({"apartmentName": session["currentApartment"]},
                             {
                                 "$set":{"task_nameList": apartment["task_nameList"]}
                             })
     return render_template('finish_lookup.html', apartment=apartment)
+
 
 @app.route('/lookup_restart')
 def renderLookup_Restart():
