@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <!-- Using the W3 CSS framework for styling -->
     <link rel="stylesheet" href="static/w3.css">
+    <!-- Font Awesome icon pack -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -16,4 +19,10 @@
       {% block content %}{% endblock %}
     </div> <!-- id = "content" -->
   </body>
+
+  <footer class="w3-container w3-padding-24 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <a href="https://www.linkedin.com/in/cwguan-2020" target="_blank"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <a href="https://github.com/cwguan/chore-organizer" target="_blank"><i class="fa fa-github w3-hover-opacity"></i></a>
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  </footer>
 </html>
