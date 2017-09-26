@@ -4,23 +4,32 @@
 
 {% block content %}
 
-<div class="info w3-container">
-  <p>Your apartment name is {{ session["apartmentName"] }}.</p>
-  <p>You have {{ session["numTasks"] }} tasks to do.</p>
-  <p>The number of roommates you have is {{ session["numRoommates"] }}.</p>
-  <p>The names of your roommates are: </p>
+<div class="info w3-container w3-row">
+  <div class="w3-container w3-third">
+    <p>Your apartment name is {{ session["apartmentName"] }}.</p>
+    <p>You have {{ session["numTasks"] }} tasks to do.</p>
+    <p>The number of roommates you have is {{ session["numRoommates"] }}.</p>
+  </div>
 
-  <!-- For loop to list out all of the occupants' names -->
-  {% for name in names %}
-    <p> {{ name }}</p>
-  {% endfor %}
+  <div class="w3-container w3-third w3-border-left">
+    <p>The names of your roommates are: </p>
 
-  <p>The tasks for the apartment are: </p>
-  <!-- For loop to list out all the tasks -->
-  {% for task in tasks %}
-    <p> {{ task }} </p>
-  {% endfor %}
+    <!-- For loop to list out all of the occupants' names -->
+    {% for name in names %}
+      <p> {{ name }}</p>
+    {% endfor %}
+  </div>
 
+  <div class="w3-container w3-third w3-border-left">
+    <p>The tasks for the apartment are: </p>
+    <!-- For loop to list out all the tasks -->
+    {% for task in tasks %}
+      <p> {{ task }} </p>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="w3-container">
   {% for task, roommate in task_roommate.items() %}
     <p> {{ roommate }} is in charge of {{ task }}</p>
   {% endfor %}
