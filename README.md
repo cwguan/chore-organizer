@@ -12,4 +12,4 @@ Next, any one of your roommates and look up your apartment and check off which t
 
 The application is hosted on Heroku and can be found at [https://the-chore-organizer.herokuapp.com](https://the-chore-organizer.herokuapp.com).
 
-This was a small side project I created for me to be able to practice using Flask and MongoDB as well as to dip my feet into learning and using a new CSS framework, W3. 
+This was a small side project I created for me to be able to practice using Flask and MongoDB as well as to dip my feet into learning and using a new CSS framework, W3. Any issues, comments, or feedback would be greatly appreciated!
