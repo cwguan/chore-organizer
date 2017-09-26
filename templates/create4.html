@@ -4,29 +4,32 @@
 
 {% block content %}
 
-<p>Your apartment name is {{ session["apartmentName"] }}</p>
-<p>You have {{ session["numTasks"] }} tasks to do</p>
-<p>The number of roommates you have is {{ session["numRoommates"] }}</p>
-<p>The names of your roommates are: </p>
+<div class="info w3-container">
+  <p>Your apartment name is {{ session["apartmentName"] }}.</p>
+  <p>You have {{ session["numTasks"] }} tasks to do.</p>
+  <p>The number of roommates you have is {{ session["numRoommates"] }}.</p>
+  <p>The names of your roommates are: </p>
 
-<!-- For loop to list out all of the occupants' names -->
-{% for name in names %}
-  <p> {{ name }}</p>
-{% endfor %}
+  <!-- For loop to list out all of the occupants' names -->
+  {% for name in names %}
+    <p> {{ name }}</p>
+  {% endfor %}
 
-<p>The tasks for the apartment are: </p>
-<!-- For loop to list out all the tasks -->
-{% for task in tasks %}
-  <p> {{ task }} </p>
-{% endfor %}
+  <p>The tasks for the apartment are: </p>
+  <!-- For loop to list out all the tasks -->
+  {% for task in tasks %}
+    <p> {{ task }} </p>
+  {% endfor %}
+</div>
 
-<p> Now, assign a person to each task. </p>
 
 <!-- Uses 2 for-loops to generate task with corresponding dropdown menus -->
-<form action="/create5">
+<form class="w3-container" action="/create5">
+  <p> Now, assign a person to each task. </p>
+
   {% for task in tasks %}
-    <p>{{ task }}</p>
-    <select name="task-roommate">
+    <h4>{{ task }}</h4>
+    <select class="w3-select w3-border" name="task-roommate">
       <!-- Loops through passed-in list of roommate names to generate dropdown-->
       {% for name in names %}
         <option value="{{ name }}">{{ name }}</option>
@@ -34,15 +37,12 @@
     </select>
 
   {% endfor %} <!-- Tasks for-loop -->
-  <br><br>
-  <input type="submit" value="Finish!">
+  <p><button class="w3-btn w3-red" type="submit">Finish!</button></p>
 </form>
 
-<br>
-
 <!-- Button to start over apartment creation -->
-<form action="/create_restart">
-  <input type="submit" value="Start Over">
+<form class="w3-container" action="/create_restart">
+  <p><button class="w3-btn w3-red" type="submit">Start Over</button></p>
 </form>
 
 {% endblock %}

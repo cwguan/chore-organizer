@@ -4,26 +4,26 @@
 
 {% block content %}
 
-<p>Your apartment name is {{ session["apartmentName"] }}</p>
-<p>You have {{ session["numTasks"] }} tasks to do.</p>
-<p>The number of roommates you have is {{ session["numRoommates"] }}</p>
+<div class="info w3-container">
+  <p>Your apartment name is {{ session["apartmentName"] }}.</p>
+  <p>You have {{ session["numTasks"] }} tasks to do.</p>
+  <p>The number of roommates you have is {{ session["numRoommates"] }}.</p>
+</div>
 
-<p> Enter the name(s) of you and your roommate(s).</p>
-
-<form action="/create3">
+<form class="w3-container" action="/create3">
+  <p> Enter the name(s) of you and your roommate(s).</p>
   <!-- For loop to create the correct number of text boxes -->
   {% for x in range(numRoommates) %}
     <!-- Used same value for name attribute to get a list -->
-    <p><input type="text" name="names" value="" required></p>
+    <p><input type="text" name="names" value="" class="w3-input w3-border w3-round-large" required></p>
   {% endfor %}
-  <input type="submit" value="Submit">
+
+  <p><button class="w3-btn w3-red" type="submit">Submit</button></p>
 </form>
 
-<br>
-
 <!-- Button to start over apartment creation -->
-<form action="/create_restart">
-  <input type="submit" value="Start Over">
+<form class="w3-container" action="/create_restart">
+  <p><button class="w3-btn w3-red" type="submit">Start Over</button></p>
 </form>
 
 {% endblock %}
