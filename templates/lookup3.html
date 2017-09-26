@@ -5,14 +5,17 @@
 {% block content %}
 
 {% if no_tasks %}
-  <p> You have no tasks! You're all done! Hooray! </p>
+  <div class="w3-container">
+    <p> You have no tasks! You're all done! Hooray! </p>
+  </div>
 {% else %}
-  <p> I have finished: </p>
-  <form action="/finish_lookup" method="post">
+  <form class="w3-container" action="/finish_lookup" method="post">
+    <p> I have finished: </p>
     {% for task in assigned_tasks %}
-    <input type="checkbox" name="finished-task" value="{{ task }}"> {{ task }} <br>
+      <input class="w3-check" type="checkbox" name="finished-task" value="{{ task }}"> {{ task }} <br>
     {% endfor %}
-    <input type="submit" value="Submit">
+
+    <p><button class="w3-btn w3-red" type="submit">Enter</button></p>
   </form>
 {% endif %}
 
