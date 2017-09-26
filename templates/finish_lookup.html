@@ -4,10 +4,16 @@
 
 {% block content %}
 
-<h1> The current assignments are:</h1>
+<h1> The current assignments are now:</h1>
 
-{% for task, roommate in apartment.task_nameList.items() %}
-  <p>{{ roommate[0] }} is in charge of {{ task }}</p>
-{% endfor %}
+<div class="w3-container">
+  {% for task, roommate in apartment.task_nameList.items() %}
+    <p>{{ roommate[0] }} is in charge of {{ task }}</p>
+  {% endfor %}
+
+  <form action="/lookup_restart">
+    <p><button class="w3-btn w3-red" type="submit">Return to Look Up</button></p>
+  </form>
+</div>
 
 {% endblock %}

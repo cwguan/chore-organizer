@@ -6,9 +6,15 @@
 
 {% if no_tasks %}
   <div class="w3-container">
-    <p> You have no tasks! You're all done! Hooray! </p>
+    <h1> You have no tasks! You're all done! Hooray! </h1>
+
+    <form class="w3-container" action="/lookup_restart">
+      <p><button class="w3-btn w3-red" type="submit">Return to Look Up</button></p>
+    </form>
+
   </div>
 {% else %}
+  <h1>Hello {{ currentRoommate }}!</h1>
   <form class="w3-container" action="/finish_lookup" method="post">
     <p> I have finished: </p>
     {% for task in assigned_tasks %}

@@ -184,6 +184,7 @@ def renderLookup3():
         return render_template('lookup3.html', no_tasks=True)
     else:
         return render_template('lookup3.html', no_tasks=False,
+                                currentRoommate=currentRoommate,
                                 assigned_tasks=assigned_tasks)
 
 

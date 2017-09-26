@@ -3,8 +3,10 @@
 {% block title %}Here is your apartment!{% endblock %}
 
 {% block content %}
-
+<h1>We found your apartment!</h1>
 <div class="lookupInfo w3-container">
+  <h2>The current tasks for your apartment are:</h2>
+  
   {% for task, roommate in apartment.task_nameList.items() %}
     <p>{{ roommate[0] }} is in charge of {{ task }}</p>
   {% endfor %}
