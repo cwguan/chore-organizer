@@ -5,15 +5,12 @@
 
 {% block content %}
 <header class="w3-display-container w3-content w3-wide" id="home">
-  <img class="w3-image w3-sepia-min" src="/static/homepage.jpg" alt="Checklist">
+  <img class="w3-image w3-sepia-min w3-round" src="/static/homepage.jpg" alt="Checklist">
 
   <div class="w3-display-middle w3-margin-top w3-center">
     <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black"><b>The Chore Organizer</b></span></h1>
   </div>
 
-  <form action="/create" class="w3-display-bottommiddle w3-padding-24">
-    <button class="w3-button w3-xlarge w3-dark-gray w3-round-large">Create your apartment now!</button>
-  </form>
 </header>
 
     <div class="w3-content w3-row w3-padding-16">
@@ -27,6 +24,9 @@
         <p> Creating an apartment is quick and easy.
             You'll be able to finish the setup process in just a few minutes and be on your way to a more organized life.
         </p>
+        <form action="/create" class="w3-padding-16">
+          <button class="w3-button w3-large w3-dark-gray w3-round-large">Create your apartment now!</button>
+        </form>
       </div>
 
       <div class="w3-container w3-third w3-padding-large">
@@ -39,7 +39,7 @@
         </p>
 
         <form action="/lookup" class="w3-padding-16">
-          <button class="w3-button w3-large w3-dark-gray w3-round-large">Look Up your apartment now!</button>
+          <button class="w3-button w3-large w3-dark-gray w3-round-large">Look Up Your Apartment Now!</button>
         </form>
       </div>
     </div>
